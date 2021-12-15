@@ -9,5 +9,8 @@ export default function createLight(
   light.castShadow = true
   scene.add(light)
 
+  const hemiLight = new THREE.HemisphereLight(0xffeeb1, 0x080820, 0.5);
+  scene.add(hemiLight);
+
   return light
 }

@@ -54,7 +54,15 @@ let vehicle: CANNON.RigidVehicle | null = null
 
 new GLTFLoader().load('/Car/scene.gltf', function (result) {
   const nodes = result.scene.children[0].children[0].children[0].children
+  
   octane = nodes[0] as Object3DGLTF
+
+  octane.traverse(function (child: Object3DGLTF) {
+    if(child.isMesh) {
+       child.material.metalness = 0;
+        child.castShadow = true;}
+  })
+
   for (let i = 1; i < nodes.length; i++) {
     nodes[i].scale.set(2, 2, 2)
     nodes[i].castShadow = true
@@ -116,7 +124,7 @@ new GLTFLoader().load('/Car/scene.gltf', function (result) {
 
     world.addBody(vehicle.wheelBodies[i])
     world.addConstraint(vehicle.constraints[i])
-    vehicle.wheelBodies[i].angularDamping = 0.3
+    vehicle.wheelBodies[i].angularDamping = 0.1
   }
 })
 
